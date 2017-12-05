@@ -18,18 +18,18 @@ Boids Simulation using:
 
 ## Outputs
 
-~ 60 fps\ 
-CPU : **i7-4790k**\
-GPU : **GTX 760**\
+~ 60 fps  
+CPU : i7-4790k  
+GPU : GTX 760  
 
 **C++ Threading** - 7 flocks, 20 boids each (140 boids in total)
-![cpp_threading.gif](cpp_threading.gif "cpp_threading.gif")
+![cpp_threading.gif](../outputs/cpp_threading.gif)
 
 **TBB** - 7 flocks, 50 boids each (350 boids in total)
-![tbb.gif](tbb.gif "tbb.gif")
+![tbb.gif](../outputs/tbb.gif)
 
 **CUDA** - 7 flocks, 100 boids each (700 boids in total)
-![cuda.gif](cuda.gif "cuda.gif")
+![cuda.gif](../outputs/cuda.gif)
 
 **OpenCL** - 24 flocks, 80 boids each (1920 boids in total)
-![opencl.gif](opencl.gif "opencl.gif")
+![opencl.gif](../outputs/opencl.gif)
