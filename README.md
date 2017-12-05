@@ -26,10 +26,10 @@ GPU : GTX 760
 ![cpp_threading.gif](../outputs/cpp_threading.gif)
 
 **TBB** - 7 flocks, 50 boids each (350 boids in total)
-![tbb.gif](../outputs/tbb.gif)
+![tbb.gif](outputs/tbb.gif)
 
 **CUDA** - 7 flocks, 100 boids each (700 boids in total)
-![cuda.gif](../outputs/cuda.gif)
+![cuda.gif](outputs/cuda.gif)
 
 **OpenCL** - 24 flocks, 80 boids each (1920 boids in total)
-![opencl.gif](../outputs/opencl.gif)
+![opencl.gif](outputs/opencl.gif)
