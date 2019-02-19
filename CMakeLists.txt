@@ -28,4 +28,6 @@ add_subdirectory(glfw)
 include_directories(glfw/include)
 
 add_subdirectory(01_cpp_threading)
+add_subdirectory(03_cuda)
 add_subdirectory(04a_opencl_cpu_gpu)
+add_subdirectory(04b_opencl_gpu_only)
