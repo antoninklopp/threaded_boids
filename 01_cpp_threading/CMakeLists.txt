@@ -6,29 +6,11 @@ project(Boids_cpp)
 set (CMAKE_CXX_STANDARD 11)
 set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=gnu++11")
 
-FIND_PACKAGE(OpenMP REQUIRED)
-message(STATUS $ENV{OPENMP_FOUND})
-if (OPENMP_FOUND)
-    set (CMAKE_C_FLAGS "${CMAKE_C_FLAGS} ${OpenMP_C_FLAGS}")
-    set (CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${OpenMP_CXX_FLAGS}")
-    set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
-endif()
-
-find_package(GLEW REQUIRED)
-if (GLEW_FOUND)
-    include_directories(${GLEW_INCLUDE_DIRS})
-    link_libraries(${GLEW_LIBRARIES})
-endif()
-
-add_subdirectory(glfw)
-
-include_directories(glfw/include)
-
 include_directories(src)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
-include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+include_directories(${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS})
 
 file(
     GLOB
@@ -38,5 +20,5 @@ file(
 )
 
 add_library(boids_cpp SHARED ${source_files})
-add_executable(main main.cpp)
-target_link_libraries(main ${GLEW_LIBRARIES} glfw boids_cpp ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
+add_executable(main_cpp main.cpp)
+target_link_libraries(main_cpp ${GLEW_LIBRARIES} glfw boids_cpp ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
