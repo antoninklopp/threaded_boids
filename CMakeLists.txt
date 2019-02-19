@@ -20,9 +20,11 @@ find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
 include_directories(library ${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
 
-find_package(OpenCL REQUIRED)
-include_directories(${OpenCL_INCLUDE_DIRS})
-link_directories(${OpenCL_LIBRARY})
+set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11 -lOpenCL")
+
+# find_package(OpenCL REQUIRED)
+# include_directories(${OpenCL_INCLUDE_DIRS})
+# link_directories(${OpenCL_LIBRARY})
 
 add_subdirectory(glfw)
 include_directories(glfw/include)

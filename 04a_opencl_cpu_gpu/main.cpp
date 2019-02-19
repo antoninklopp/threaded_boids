@@ -1,10 +1,10 @@
 #define _CRT_SECURE_NO_DEPRECATE
-
+#define CL_USE_DEPRECATED_OPENCL_1_2_APIS
 #include <vector>
 #include <time.h>
 #include <iostream>
 #include <GL/glew.h>
-#include <GL/freeglut.h>	
+#include <GL/freeglut.h>
 #include <CL/cl.h>
 
 #include "Flock.hpp"
@@ -24,11 +24,11 @@ void updateEverything() {
 	glClearColor(1, 1, 1, 1);
 
 	for (int i = 0; i < nb_of_flocks; i++) {
-		
+
 		flocks[i].drawBoids();
 		flocks[i].moveBoidsToNewPositions();
 
-		
+
 	}
 		glutSwapBuffers();
 		glutPostRedisplay();
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]) {
 	glutInitWindowPosition((1920 - width) / 2, (1080 - height) / 2);
 	glutCreateWindow("Boids");
 	glutDisplayFunc(updateEverything);
-	
+
 	nb_of_flocks = 24;
 
 	for (int i = 0; i < nb_of_flocks; i++) {
@@ -55,4 +55,3 @@ int main(int argc, char *argv[]) {
 
 	glutMainLoop();
 }
-

@@ -57,7 +57,7 @@ Flock::Flock(Color color) {
 	}
 
 	FILE *fp;
-	char fileName[] = "../kernel.cl";
+	char fileName[] = "../04a_opencl_cpu_gpu/kernel.cl";
 	char *source_str;
 	size_t source_size;
 
@@ -93,7 +93,7 @@ Flock::Flock(Color color) {
 	gpu_context = clCreateContext(NULL, 1, &gpu_device_id, NULL, NULL, &ret);
 
 	// Create a program from the kernel source
-	cpu_program = clCreateProgramWithSource(cpu_context, 1, (const char **)&source_str, (const size_t *)&source_size, &ret); 
+	cpu_program = clCreateProgramWithSource(cpu_context, 1, (const char **)&source_str, (const size_t *)&source_size, &ret);
 	gpu_program = clCreateProgramWithSource(gpu_context, 1, (const char **)&source_str, (const size_t *)&source_size, &ret);
 
 	// Build the program
@@ -108,7 +108,7 @@ Flock::Flock(Color color) {
 	cpu_command_queue = clCreateCommandQueue(cpu_context, cpu_device_id, 0, &ret);
 	gpu_command_queue = clCreateCommandQueue(gpu_context, gpu_device_id, 0, &ret);
 
-	// Create memory buffers on the device for each vector 
+	// Create memory buffers on the device for each vector
 	dev_old_velocity = clCreateBuffer(cpu_context, CL_MEM_READ_ONLY, NB_OF_BOIDS * 2 * sizeof(float), NULL, NULL);
 
 	dev_cohesion = clCreateBuffer(cpu_context, CL_MEM_READ_ONLY, NB_OF_BOIDS * 2 * sizeof(float), NULL, NULL);
@@ -133,7 +133,7 @@ Vector2D Flock::applyCohesionRule(Boid boid) {
 		if (this->boids[i] != boid)
 			if (this->boids[i].position.getDistance(boid.position) < vision_distance)
 				center_of_mass += this->boids[i].position;
-			 
+
 	center_of_mass /= this->boids.size() - 1;
 
 	cohesion_vector = (center_of_mass - boid.position) / cohesion_parameter;
@@ -226,6 +226,7 @@ void Flock::moveBoidsToNewPositions() {
 	ret = clSetKernelArg(velocity_kernel, 3, sizeof(cl_mem), (void *)&dev_alignment);
 
 	ret = clSetKernelArg(velocity_kernel, 4, sizeof(cl_mem), (void *)&dev_new_velocity_cpu);
+
 
 	// Execute the OpenCL kernel on the list
 	ret = clEnqueueNDRangeKernel(cpu_command_queue, velocity_kernel, 1, NULL, &global_item_size, &local_item_size, 0, NULL, NULL);

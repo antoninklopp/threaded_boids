@@ -9,16 +9,17 @@
 #include <thread>
 
 #include <CL/cl.h>
- 
+#include <stdio.h>
+
 
 #define MAX_SOURCE_SIZE (0x100000)
 
-#define NB_OF_BOIDS 80
+#define NB_OF_BOIDS 100
 
 class Flock {
 
-	static size_t global_item_size; 
-	static size_t local_item_size; 
+	static size_t global_item_size;
+	static size_t local_item_size;
 
 	static cl_platform_id cpu_platform_id;
 	static cl_platform_id gpu_platform_id;
@@ -58,7 +59,7 @@ public:
 	Vector2D applyCohesionRule(Boid boid);
 	Vector2D applySeparationRule(Boid boid);
 	Vector2D applyAlignmentRule(Boid boid);
-	
+
 	void drawBoids();
 
 	void moveBoidsToNewPositions();

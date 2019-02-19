@@ -10,15 +10,15 @@ const int height = 900;
 
 // Hyperparameters  - lower = stronger
 
-const float cohesion_parameter = 1000.0f;
-const float separation_parameter = 10.0f;
-const float alignment_parameter = 10.0f;
+const float cohesion_parameter = 1.0f;
+const float separation_parameter = 1.0f;
+const float alignment_parameter = 1.0f;
 
-const float separation_distance = 0.01f;
+const float separation_distance = 1.0f;
 
-const float vision_distance = 1.0f;
+const float vision_distance = 100.0f;
 
-const float v_lim = .01f;
+const float v_lim = 1.0f;
 
 typedef struct Color {
 
