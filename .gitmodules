@@ -1,0 +1,3 @@
+[submodule "01_cpp_threading/glfw"]
+	path = 01_cpp_threading/glfw
+	url = https://github.com/glfw/glfw
