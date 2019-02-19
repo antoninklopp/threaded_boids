@@ -50,7 +50,7 @@ Flock::Flock(Color color) {
 	}
 
 	FILE *fp;
-	char fileName[] = "../../kernel.cl";
+	char fileName[] = "../04b_opencl_gpu_only/kernel.cl";
 	char *source_str;
 	size_t source_size;
 
@@ -91,7 +91,7 @@ Flock::Flock(Color color) {
 	// Create a command queue
 	command_queue = clCreateCommandQueue(context, device_id, 0, &ret);
 
-	// Create memory buffers on the device for each vector 
+	// Create memory buffers on the device for each vector
 	dev_old_velocity = clCreateBuffer(context, CL_MEM_READ_ONLY, NB_OF_BOIDS * 2 * sizeof(float), NULL, NULL);
 
 	dev_cohesion = clCreateBuffer(context, CL_MEM_READ_ONLY, NB_OF_BOIDS * 2 * sizeof(float), NULL, NULL);
@@ -114,7 +114,7 @@ Vector2D Flock::applyCohesionRule(Boid boid) {
 		if (this->boids[i] != boid)
 			if (this->boids[i].position.getDistance(boid.position) < vision_distance)
 				center_of_mass += this->boids[i].position;
-			 
+
 	center_of_mass /= this->boids.size() - 1;
 
 	cohesion_vector = (center_of_mass - boid.position) / cohesion_parameter;
