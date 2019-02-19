@@ -1,1 +1,0 @@
-/usr/bin/c++   -std=gnu++11 -fopenmp    CMakeFiles/main.dir/main.cpp.o  -o main -Wl,-rpath,/home/antonin/Documents/threaded_boids/01_cpp_threading/bin libboids_cpp.so 

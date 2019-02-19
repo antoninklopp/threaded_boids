@@ -1,4 +1,0 @@
-/home/antonin/Documents/threaded_boids/01_cpp_threading/bin/CMakeFiles/rebuild_cache.dir
-/home/antonin/Documents/threaded_boids/01_cpp_threading/bin/CMakeFiles/boids_cpp.dir
-/home/antonin/Documents/threaded_boids/01_cpp_threading/bin/CMakeFiles/edit_cache.dir
-/home/antonin/Documents/threaded_boids/01_cpp_threading/bin/CMakeFiles/main.dir
