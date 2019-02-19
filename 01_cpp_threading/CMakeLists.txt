@@ -26,6 +26,10 @@ include_directories(glfw/include)
 
 include_directories(src)
 
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
+
 file(
     GLOB
     source_files
@@ -35,4 +39,4 @@ file(
 
 add_library(boids_cpp SHARED ${source_files})
 add_executable(main main.cpp)
-target_link_libraries(main boids_cpp ${GLFW_LIBRARIES})
+target_link_libraries(main ${GLEW_LIBRARIES} glfw boids_cpp ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
