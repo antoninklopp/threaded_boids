@@ -5,12 +5,19 @@
 #include <GL/freeglut.h>	
 #include "Flock.hpp"
 #include "Common.hpp"
+#include <unistd.h>
 
 vector<Flock> flocks;
 int nb_of_flocks;
 
 void updateEverything() {
 	vector<std::thread> flock_threads;
+
+	clock_t tStart = clock();
+	struct timespec start, finish;
+	double elapsed = 0;
+
+	clock_gettime(CLOCK_MONOTONIC, &start);
 
 	glClear(GL_COLOR_BUFFER_BIT);
 	glClearColor(1, 1, 1, 1);
@@ -28,6 +35,13 @@ void updateEverything() {
 
 		flock_threads[i].join();
 	}
+
+	clock_gettime(CLOCK_MONOTONIC, &finish);
+
+	elapsed = (finish.tv_sec - start.tv_sec);
+	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
+	
+	std::cerr << "time taken " << elapsed << endl;
 
 }
 
@@ -47,7 +61,7 @@ int main(int argc, char *argv[]) {
 
 	// vector<Flock> flocks;
 
-	nb_of_flocks = 7;
+	nb_of_flocks = 100;
 
 	for (int i = 0; i < nb_of_flocks; i++) {
 

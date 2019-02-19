@@ -22,15 +22,15 @@ include_directories(library ${OPENGL_INCLUDE_DIRS} ${GLUT_INCLUDE_DIRS})
 
 set(CMAKE_CXX_FLAGS "-g -Wall -std=c++11")
 
-# find_package(OpenCL REQUIRED)
-# include_directories(${OpenCL_INCLUDE_DIRS})
-# link_directories(${OpenCL_LIBRARY})
+find_package(OpenCL REQUIRED)
+include_directories(${OpenCL_INCLUDE_DIRS})
+link_directories(${OpenCL_LIBRARY})
 
 add_subdirectory(glfw)
 include_directories(glfw/include)
 
 add_subdirectory(01_cpp_threading)
 add_subdirectory(02_tbb)
-# add_subdirectory(03_cuda)
+add_subdirectory(03_cuda)
 add_subdirectory(04a_opencl_cpu_gpu)
 add_subdirectory(04b_opencl_gpu_only)

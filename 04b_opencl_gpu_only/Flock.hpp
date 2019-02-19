@@ -13,7 +13,7 @@
 
 #define MAX_SOURCE_SIZE (0x100000)
 
-#define NB_OF_BOIDS 1000
+#define NB_OF_BOIDS 100
 
 class Flock {
 
