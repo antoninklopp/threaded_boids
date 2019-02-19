@@ -24,7 +24,7 @@ public:
 	bool operator==(Boid boid);
 	bool operator!=(Boid boid);
 
-	void Boid::computeNewPosition();
+	void computeNewPosition();
 
 	void boundPosition();
 	void limitVelocity();

@@ -3,9 +3,8 @@
 #include <vector>
 #include <time.h>
 #include <iostream>
-#include <GL\glew.h>
-#include <GL\freeglut.h>	
-#include <Windows.h>
+#include <GL/glew.h>
+#include <GL/freeglut.h>	
 #include <CL/cl.h>
 
 #include "Flock.hpp"

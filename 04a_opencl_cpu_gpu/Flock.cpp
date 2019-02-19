@@ -57,7 +57,7 @@ Flock::Flock(Color color) {
 	}
 
 	FILE *fp;
-	char fileName[] = "./kernel.cl";
+	char fileName[] = "../kernel.cl";
 	char *source_str;
 	size_t source_size;
 
