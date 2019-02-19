@@ -30,8 +30,9 @@ void updateEverything() {
 
 
 	}
-		glutSwapBuffers();
-		glutPostRedisplay();
+
+	glutSwapBuffers();
+	glutPostRedisplay();
 }
 
 int main(int argc, char *argv[]) {

@@ -1,4 +1,5 @@
-__kernel void computeNewVelocity(__global const float *old_velocity, __global const float *cohesion, __global float *separation, __global float *alignment, __global float *new_velocity) {
+__kernel void computeNewVelocity(__global const float *old_velocity, __global const float *cohesion, 
+	__global float *separation, __global float *alignment, __global float *new_velocity) {
 
 	// Get the index of the current element to be processed
 	int i = get_global_id(0);
