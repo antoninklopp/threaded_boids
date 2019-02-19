@@ -1,3 +1,7 @@
 [submodule "04a_opencl_cpu_gpu/glfw"]
 	path = 04a_opencl_cpu_gpu/glfw
 	url = https://github.com/glfw/glfw
+  
+[submodule "01_cpp_threading/glfw"]
+	path = 01_cpp_threading/glfw
+	url = https://github.com/glfw/glfw

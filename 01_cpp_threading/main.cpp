@@ -1,9 +1,9 @@
 #include <vector>
 #include <time.h>
 #include <iostream>
-#include <GL\glew.h>
-#include <GL\freeglut.h>	
-#include <Windows.h>
+#include <GL/glew.h>
+#include <GL/freeglut.h>	
+#include <unistd.h>
 
 #include "Flock.hpp"
 #include "Common.hpp"
@@ -31,7 +31,8 @@ void updateEverything() {
 		flock_threads[i].join();
 	}
 
-	Sleep(20);
+	unsigned int microseconds = 20;
+	usleep(microseconds);
 }
 
 int main(int argc, char *argv[]) {

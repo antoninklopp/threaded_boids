@@ -14,9 +14,21 @@ if (OPENMP_FOUND)
     set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} ${OpenMP_EXE_LINKER_FLAGS}")
 endif()
 
-find_package(PkgConfig REQUIRED)
-pkg_search_module(GLFW REQUIRED glfw3)
-include_directories(${GLFW_INCLUDE_DIRS})
+find_package(GLEW REQUIRED)
+if (GLEW_FOUND)
+    include_directories(${GLEW_INCLUDE_DIRS})
+    link_libraries(${GLEW_LIBRARIES})
+endif()
+
+add_subdirectory(glfw)
+
+include_directories(glfw/include)
+
+include_directories(src)
+
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
+include_directories( ${OPENGL_INCLUDE_DIRS}  ${GLUT_INCLUDE_DIRS} )
 
 file(
     GLOB
@@ -27,4 +39,4 @@ file(
 
 add_library(boids_cpp SHARED ${source_files})
 add_executable(main main.cpp)
-target_link_libraries(main boids_cpp ${GLFW_LIBRARIES})
+target_link_libraries(main ${GLEW_LIBRARIES} glfw boids_cpp ${OPENGL_LIBRARIES} ${GLUT_LIBRARY})
