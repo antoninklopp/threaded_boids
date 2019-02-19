@@ -50,7 +50,7 @@ Flock::Flock(Color color) {
 	}
 
 	FILE *fp;
-	char fileName[] = "../../kernel.cl";
+	char fileName[] = "../04b_opencl_gpu_only/kernel.cl";
 	char *source_str;
 	size_t source_size;
 
