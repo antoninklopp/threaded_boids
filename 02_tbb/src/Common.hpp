@@ -10,11 +10,11 @@ const int height = 900;
 
 // Hyperparameters  - lower = stronger
 
-const float cohesion_parameter = 2000.0f;
+const float cohesion_parameter = 1000.0f;
 const float separation_parameter = 10.0f;
-const float alignment_parameter = 500.0f;
+const float alignment_parameter = 10.0f;
 
-const float separation_distance = 0.03f;
+const float separation_distance = 0.01f;
 
 const float v_lim = .01;
 
@@ -26,6 +26,6 @@ typedef struct Color {
 
 } Color;
 
-const Color colors[8] = { { 0, 0, 0 }, { 0, 0, 1 }, { 0, 1, 0 }, { 0, 1, 1 }, { 1, 0, 0 }, { 1, 0, 1 }, { 1, 1, 0 }, {1, 1, 1} };
+const Color colors[24] = { { 0, 0, 0 },{ 0, 0, 0.5 },{ 0, 0, 1 },{ 0, 0.5, 0 },{ 0, 0.5, 0.5 },{ 0, 1, 0 },{ 0, 1, 0.5 },{ 0, 1, 1 },{ 0.5, 0, 0 },{ 0.5, 0, 0.5 },{ 0.5, 0, 1 },{ 0.5, 0.5, 0 },{ 0.5, 0.5, 0.5 },{ 0.5, 1, 0 },{ 0.5, 1, 0.5 },{ 0.5, 1, 1 },{ 1, 0, 0 },{ 1, 0, 0.5 },{ 1, 0, 1 },{ 1, 0.5, 0 },{ 1, 0.5, 0.5 },{ 1, 1, 0 },{ 1, 1, 0.5 },{ 1, 1, 1 } };
 
 #endif

@@ -48,7 +48,7 @@ int main(int argc, char *argv[]) {
 
 
 
-	nb_of_flocks = 7;
+	nb_of_flocks = 1;
 
 	for (int i = 0; i < nb_of_flocks; i++) {
 

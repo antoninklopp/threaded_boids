@@ -3,7 +3,7 @@
 
 Flock::Flock(Color color) {
 
-	int nb_of_boids = 50;
+	int nb_of_boids = 1000;
 
 	for (int i = 0; i < nb_of_boids; i++) {
 
@@ -28,7 +28,7 @@ Vector2D Flock::applyCohesionRule(Boid boid) {
 	for (int i = 0; i < this->boids.size(); i++)
 		if (this->boids[i] != boid)
 			center_of_mass += this->boids[i].position;
-			 
+
 	center_of_mass /= this->boids.size() - 1;
 
 	cohesion_vector = (center_of_mass - boid.position) / cohesion_parameter;

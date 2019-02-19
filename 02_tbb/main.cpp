@@ -2,7 +2,7 @@
 #include <time.h>
 #include <iostream>
 #include <GL/glew.h>
-#include <GL/freeglut.h>	
+#include <GL/freeglut.h>
 #include <unistd.h>
 
 #include "Flock.hpp"
@@ -22,7 +22,7 @@ void updateEverything() {
 	tbb::task_group g;
 
 	for (int i = 0; i < nb_of_flocks; i++) {
-		
+
 		flocks[i].drawBoids();
 
 	}
@@ -50,13 +50,13 @@ int main(int argc, char *argv[]) {
 	glutInitWindowPosition((1920 - width) / 2, (1080 - height) / 2);
 	glutCreateWindow("Boids");
 	glutDisplayFunc(updateEverything);
-		
+
 
 	// Initialize Positions
 
 	// vector<Flock> flocks;
 
-	nb_of_flocks = 7;
+	nb_of_flocks = 1;
 
 	for (int i = 0; i < nb_of_flocks; i++) {
 
@@ -66,4 +66,3 @@ int main(int argc, char *argv[]) {
 
 	glutMainLoop();
 }
-
