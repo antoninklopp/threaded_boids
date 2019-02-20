@@ -4,6 +4,7 @@
 using namespace std;
 
 extern void cudaComputeNewVelocity(float *old_velocity, float *cohesion, float *separation, float *alignment, float *new_velocity);
+extern void void cudaComputeCohesion(float *boid_position, float *new_cohesion, int size);
 
 Flock::Flock(Color color) {
 
