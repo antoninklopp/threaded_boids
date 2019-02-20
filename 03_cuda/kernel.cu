@@ -3,7 +3,7 @@
 #include "device_launch_parameters.h"
 #include <stdio.h>
 
-#define NB_OF_BOIDS 100
+#define NB_OF_BOIDS 1000
 
 __global__ void computeNewVelocity(float *old_velocity, float *cohesion, float *separation, float *alignment, float *new_velocity) {
 	
