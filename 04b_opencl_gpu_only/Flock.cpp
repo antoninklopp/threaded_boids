@@ -31,7 +31,7 @@ cl_mem Flock::dev_new_position;
 
 Flock::Flock(Color color) {
 
-	int nb_of_boids = rand() % 11 + 10; // 10 to 20
+	int nb_of_boids = 100; // 10 to 20
 
 	for (int i = 0; i < NB_OF_BOIDS; i++) {
 
