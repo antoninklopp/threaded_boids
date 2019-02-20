@@ -4,7 +4,7 @@
 using namespace std;
 
 extern void cudaComputeNewVelocity(float *old_velocity, float *cohesion, float *separation, float *alignment, float *new_velocity);
-extern void void cudaComputeCohesion(float *boid_position, float *new_cohesion, int size);
+extern void cudaComputeCohesion(float* boid_positions, float* velocity, float *new_velocity, int size); 
 
 Flock::Flock(Color color) {
 
@@ -79,7 +79,7 @@ void Flock::moveBoidsToNewPositions() {
 
 	float *dev_old_velocity, *dev_new_velocity;
 
-	float *dev_cohesion, *dev_separation, *dev_alignment;
+	float *dev_cohesion, *dev_separation, *dev_alignment, *dev_position;
 
 	float old_velocity[NB_OF_BOIDS * 2];
 	float new_velocity[NB_OF_BOIDS * 2];
@@ -88,6 +88,8 @@ void Flock::moveBoidsToNewPositions() {
 	float separation[NB_OF_BOIDS * 2];
 	float alignment[NB_OF_BOIDS * 2];
 
+	float position[NB_OF_BOIDS * 2];
+
 	cudaMalloc((void**)&dev_old_velocity, NB_OF_BOIDS * 2 * sizeof(float));
 	cudaMalloc((void**)&dev_new_velocity, NB_OF_BOIDS * 2 * sizeof(float));
 
@@ -95,34 +97,45 @@ void Flock::moveBoidsToNewPositions() {
 	cudaMalloc((void**)&dev_separation, NB_OF_BOIDS * 2 * sizeof(float));
 	cudaMalloc((void**)&dev_alignment, NB_OF_BOIDS * 2 * sizeof(float));
 
+	cudaMalloc((void**)&dev_position, NB_OF_BOIDS * 2 * sizeof(float));
+
 	for(int i = 0; i < this->boids.size(); i++) {
 
 		old_velocity[i] = this->boids[i].velocity.x;
 		old_velocity[NB_OF_BOIDS + i] = this->boids[i].velocity.y;
 
-		Vector2D v1 = applyCohesionRule(this->boids[i]);
-		Vector2D v2 = applySeparationRule(this->boids[i]);
-		Vector2D v3 = applyAlignmentRule(this->boids[i]);
+		// Vector2D v1 = applyCohesionRule(this->boids[i]);
+		// Vector2D v2 = applySeparationRule(this->boids[i]);
+		// Vector2D v3 = applyAlignmentRule(this->boids[i]);
 
-		cohesion[i] = v1.x;
-		cohesion[NB_OF_BOIDS + i] = v1.y;
+		// cohesion[i] = v1.x;
+		// cohesion[NB_OF_BOIDS + i] = v1.y;
 
-		separation[i] = v2.x;
-		separation[NB_OF_BOIDS + i] = v2.y;
+		// separation[i] = v2.x;
+		// separation[NB_OF_BOIDS + i] = v2.y;
 
-		alignment[i] = v3.x;
-		alignment[NB_OF_BOIDS + i] = v3.y;
+		// alignment[i] = v3.x;
+		// alignment[NB_OF_BOIDS + i] = v3.y;
+
+		position[i] = this->boids[i].position.x;
+		position[i + NB_OF_BOIDS] = this->boids[i].position.y;  
 	}
 
+	cudaMemcpy(dev_position, position, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
 	cudaMemcpy(dev_old_velocity, old_velocity, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
 
-	cudaMemcpy(dev_cohesion, cohesion, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
-	cudaMemcpy(dev_separation, separation, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
-	cudaMemcpy(dev_alignment, alignment, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
+	cudaComputeCohesion(dev_position, dev_old_velocity, dev_new_velocity, NB_OF_BOIDS);
 
-	cudaComputeNewVelocity(dev_old_velocity, dev_cohesion, dev_separation, dev_alignment, dev_new_velocity);
+	cudaMemcpy(new_velocity, dev_new_velocity, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyDeviceToHost);
 
-	cudaMemcpy(new_velocity, dev_new_velocity, NB_OF_BOIDS * 2 * sizeof(int), cudaMemcpyDeviceToHost);
+
+	// cudaMemcpy(dev_cohesion, cohesion, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
+	// cudaMemcpy(dev_separation, separation, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
+	// cudaMemcpy(dev_alignment, alignment, NB_OF_BOIDS * 2 * sizeof(float), cudaMemcpyHostToDevice);
+
+	// cudaComputeNewVelocity(dev_old_velocity, dev_cohesion, dev_separation, dev_alignment, dev_new_velocity);
+
+	// cudaMemcpy(new_velocity, dev_new_velocity, NB_OF_BOIDS * 2 * sizeof(int), cudaMemcpyDeviceToHost);
 
 	cudaFree(dev_old_velocity);
 	cudaFree(dev_new_velocity);
