@@ -4,7 +4,7 @@
 #include <stdio.h>
 #include <iostream>
 
-#define NB_OF_BOIDS 100
+#define NB_OF_BOIDS 1000
 #define NB_BLOCKS 50
 #define VISION_DISTANCE 2
 #define COHESION_PARAMETER 2000
@@ -32,8 +32,8 @@ void applyRules(float* boid_positions, float* velocity, float *new_velocity, int
 				boid_positions[this_index + NB_OF_BOIDS], boid_positions[i], 
 				boid_positions[i + NB_OF_BOIDS]);
 			if (dist < VISION_DISTANCE){
-				center_of_mass.x += boid_positions[this_index]; 
-				center_of_mass.y += boid_positions[this_index + NB_OF_BOIDS]; 
+				center_of_mass.x += boid_positions[i]; 
+				center_of_mass.y += boid_positions[i + NB_OF_BOIDS]; 
 				perceived_velocity.x += velocity[i];
 				perceived_velocity.y += velocity[i + NB_OF_BOIDS];
 			}
@@ -44,8 +44,8 @@ void applyRules(float* boid_positions, float* velocity, float *new_velocity, int
 		}
 	}
 			 
-	center_of_mass.x = center_of_mass.x / (size - 1);
-	center_of_mass.y = center_of_mass.y / (size - 1);
+	center_of_mass.x /= (size - 1);
+	center_of_mass.y /= (size - 1);
 
 	cohesion_vector.x = (center_of_mass.x - boid_positions[this_index]) / COHESION_PARAMETER;
 	cohesion_vector.y = (center_of_mass.y - boid_positions[this_index + NB_OF_BOIDS]) / COHESION_PARAMETER;
@@ -71,7 +71,7 @@ void computeCohesion(float* boid_positions, float* velocity, float *new_velocity
 }
 
 void cudaComputeCohesion(float* boid_positions, float* velocity, float *new_velocity, int size){
-	computeCohesion << <10, 10 >> > (boid_positions, velocity, new_velocity, size);
+	computeCohesion << <100, 100 >> > (boid_positions, velocity, new_velocity, size);
 }
 
 __global__ 
