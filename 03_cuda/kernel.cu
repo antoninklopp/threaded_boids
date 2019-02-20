@@ -14,7 +14,8 @@
 
 __device__ 
 float get_distance(float &position1x, float& position1y, float position2x, float position2y){
-	return sqrt(pow(position1x - position2x, 2) + pow(position1y - position2y, 2));  
+	return sqrt((position1x - position2x) * (position1x - position2x) + 
+		(position1y - position2y) * (position1y - position2y));  
 }
 
 __device__
@@ -38,8 +39,8 @@ void applyRules(float* boid_positions, float* velocity, float *new_velocity, int
 				perceived_velocity.y += velocity[i + NB_OF_BOIDS];
 			}
 			if (dist < SEPARATION_DISTANCE){
-				separation_vector.x -= (boid_positions[this_index] - boid_positions[i]) / SEPARATION_PARAMETER; 
-				separation_vector.y -= (boid_positions[this_index + NB_OF_BOIDS] - boid_positions[i + NB_OF_BOIDS]) / SEPARATION_PARAMETER;
+				separation_vector.x -= ((- boid_positions[this_index] + boid_positions[i]) / SEPARATION_PARAMETER); 
+				separation_vector.y -= ((- boid_positions[this_index + NB_OF_BOIDS] + boid_positions[i + NB_OF_BOIDS]) / SEPARATION_PARAMETER);
 			} 
 		}
 	}
@@ -71,7 +72,7 @@ void computeCohesion(float* boid_positions, float* velocity, float *new_velocity
 }
 
 void cudaComputeCohesion(float* boid_positions, float* velocity, float *new_velocity, int size){
-	computeCohesion << <100, 100 >> > (boid_positions, velocity, new_velocity, size);
+	computeCohesion << <32, 32 >> > (boid_positions, velocity, new_velocity, size);
 }
 
 __global__ 
