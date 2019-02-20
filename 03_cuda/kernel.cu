@@ -8,9 +8,9 @@
 #define NB_BLOCKS 50
 #define VISION_DISTANCE 2
 #define COHESION_PARAMETER 50
-#define SEPARATION_PARAMETER 10
-#define ALIGNEMENT_PARAMETER 500
-#define SEPARATION_DISTANCE 0.03
+#define SEPARATION_PARAMETER 5
+#define ALIGNMENT_PARAMETER 50
+#define SEPARATION_DISTANCE 0.05
 
 __device__ 
 float get_distance(float &position1x, float& position1y, float position2x, float position2y){
@@ -53,8 +53,8 @@ void applyRules(float* boid_positions, float* velocity, float *new_velocity, int
 	perceived_velocity.x /= (size - 1);
 	perceived_velocity.y /= (size - 1);
 
-	alignment_vector.x = (perceived_velocity.x - velocity[this_index]) / ALIGNEMENT_PARAMETER;
-	alignment_vector.y = (perceived_velocity.y - velocity[this_index + NB_OF_BOIDS]) / ALIGNEMENT_PARAMETER;
+	alignment_vector.x = (perceived_velocity.x - velocity[this_index]) / ALIGNMENT_PARAMETER;
+	alignment_vector.y = (perceived_velocity.y - velocity[this_index + NB_OF_BOIDS]) / ALIGNMENT_PARAMETER;
 	
 	new_velocity[this_index] = velocity[this_index] + cohesion_vector.x + separation_vector.x + alignment_vector.x;
 	new_velocity[NB_OF_BOIDS + this_index] = velocity[NB_OF_BOIDS + this_index] + cohesion_vector.y + separation_vector.y + alignment_vector.y;   
