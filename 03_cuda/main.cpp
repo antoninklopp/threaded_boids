@@ -21,6 +21,9 @@ void updateEverything() {
 	clock_t tStart = clock();
 	struct timespec start, finish;
 	double elapsed = 0;
+	
+	struct timespec startDrawing, finishDrawing;
+	double elapsedDrawing = 0;
 
 	clock_gettime(CLOCK_MONOTONIC, &start);
 
@@ -28,11 +31,19 @@ void updateEverything() {
 	glClearColor(1, 1, 1, 1);
 
 	for (int i = 0; i < nb_of_flocks; i++) {
+		clock_gettime(CLOCK_MONOTONIC, &startDrawing);
 
 		flocks[i].drawBoids();
+		clock_gettime(CLOCK_MONOTONIC, &finishDrawing);
+
+		elapsedDrawing += (finishDrawing.tv_sec - startDrawing.tv_sec);
+		elapsedDrawing += (finishDrawing.tv_nsec - startDrawing.tv_nsec) / 1000000000.0;
 		flock_threads.push_back(thread(&Flock::moveBoidsToNewPositions, &flocks[i]));
 
 	}
+	
+	clock_gettime(CLOCK_MONOTONIC, &startDrawing);
+
 	glutSwapBuffers();
 	glutPostRedisplay();
 
@@ -46,14 +57,19 @@ void updateEverything() {
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
 	
-	_time += elapsed; 
+	clock_gettime(CLOCK_MONOTONIC, &finishDrawing);
+
+	elapsedDrawing += (finishDrawing.tv_sec - startDrawing.tv_sec);
+	elapsedDrawing += (finishDrawing.tv_nsec - startDrawing.tv_nsec) / 1000000000.0;
+
+	_time += elapsed - elapsedDrawing; 
 	
 	measure ++; 
 
 	if (measure == 20){
 		_time /=20; 
 		std::cout << nb_flocks <<  " " << _time << endl; 
-		exit(0); 
+		// exit(0); 
 	}
 
 }

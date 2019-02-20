@@ -11,7 +11,7 @@
 #include <CL/cl.h>
 
 
-#define MAX_SOURCE_SIZE (0x100000)
+#define MAX_SOURCE_SIZE (0x1000000000)
 
 #define NB_OF_BOIDS 100
 
