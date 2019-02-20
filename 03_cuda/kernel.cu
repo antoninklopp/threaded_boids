@@ -5,7 +5,7 @@
 #include <iostream>
 
 #define NB_OF_BOIDS 1000
-#define NB_BLOCKS 50
+#define NB_BLOCKS 2000
 #define VISION_DISTANCE 2
 #define COHESION_PARAMETER 50
 #define SEPARATION_PARAMETER 5
@@ -72,7 +72,7 @@ void computeCohesion(float* boid_positions, float* velocity, float *new_velocity
 }
 
 void cudaComputeCohesion(float* boid_positions, float* velocity, float *new_velocity, int size){
-	computeCohesion << <32, 32 >> > (boid_positions, velocity, new_velocity, size);
+	computeCohesion << <NB_BLOCKS, NB_BLOCKS >> > (boid_positions, velocity, new_velocity, size);
 }
 
 __global__ 
