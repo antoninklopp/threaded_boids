@@ -46,6 +46,11 @@ void updateEverything() {
 
 	glutSwapBuffers();
 	glutPostRedisplay();
+	
+	clock_gettime(CLOCK_MONOTONIC, &finishDrawing);
+
+	elapsedDrawing += (finishDrawing.tv_sec - startDrawing.tv_sec);
+	elapsedDrawing += (finishDrawing.tv_nsec - startDrawing.tv_nsec) / 1000000000.0;
 
 	for (int i = 0; i < nb_of_flocks; i++) {
 
@@ -56,11 +61,6 @@ void updateEverything() {
 
 	elapsed = (finish.tv_sec - start.tv_sec);
 	elapsed += (finish.tv_nsec - start.tv_nsec) / 1000000000.0;
-	
-	clock_gettime(CLOCK_MONOTONIC, &finishDrawing);
-
-	elapsedDrawing += (finishDrawing.tv_sec - startDrawing.tv_sec);
-	elapsedDrawing += (finishDrawing.tv_nsec - startDrawing.tv_nsec) / 1000000000.0;
 
 	_time += elapsed - elapsedDrawing; 
 	
@@ -69,7 +69,7 @@ void updateEverything() {
 	if (measure == 20){
 		_time /=20; 
 		std::cout << nb_flocks <<  " " << _time << endl; 
-		// exit(0); 
+		exit(0); 
 	}
 
 }
